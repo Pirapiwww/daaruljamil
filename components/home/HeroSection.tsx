@@ -1,88 +1,32 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { createClient } from "@supabase/supabase-js";
-
-// Inisialisasi Supabase
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!
-);
-
-// --- KOMPONEN COUNTER ---
-function Counter({ end, duration = 2000 }: { end: number; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const runAnimation = useCallback(() => {
-    let start = 0;
-    const stepTime = 16;
-    const totalSteps = duration / stepTime;
-    const increment = end / totalSteps;
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, stepTime);
-    return () => clearInterval(timer);
-  }, [end, duration]);
-
-  return (
-    <motion.span onViewportEnter={runAnimation} onViewportLeave={() => setCount(0)}>
-      {count.toLocaleString()}
-    </motion.span>
-  );
-}
-
-interface StatData {
-  title: string;
-  stats: string;
-}
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight, Info, MessageSquareText } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [statsData, setStatsData] = useState<StatData[]>([]);
 
+  // DATA SLIDER MASJID DAARUL JAMIL
   const slides = [
     {
-      image: "/image/hero-1.jpg",
-      title: "SELAMAT DATANG",
-      desc: "Selamat Datang di Situs Web Pondok Pesantren Ardaniah. Kami persembahkan kepada Anda segenap informasi tentang kurikulum, kegiatan, dan lingkungan belajar kami yang islami serta berwawasan luas. Kami berkomitmen mencetak generasi unggul.",
+      image: "/image/masjid-1.jpg",
+      title: "SELAMAT DATANG DI MASJID DAARUL JAMIL",
+      desc: "Pusat ibadah, dakwah, dan pembinaan umat. Mari bersama memakmurkan Masjid Daarul Jamil dan mempererat ukhuwah Islamiyah.",
     },
     {
-      image: "/image/hero-2.jpg",
-      title: "Pesantren Prospektif",
-      desc: "Mencetak santri berakhlaq mulia, berbadan sehat, kreatif, berpengetahuan luas dan berfikiran terbuka, berjiwa ikhlas, kebersahajaan, berukhuwah Islamiyah and berdikari untuk masa depan gemilang.",
+      image: "/image/masjid-2.jpg",
+      title: "PROGRAM & KEGIATAN ISLAMI",
+      desc: "Menyediakan program kerja peribadatan rutin, pelayanan sosial kematian, serta berbagai kajian ilmiah bersama para ustadz.",
     },
     {
-      image: "/image/Masjid3.jpg",
-      title: "Lingkungan Islami & Modern",
-      desc: "Fasilitas lengkap untuk mendukung perkembangan spiritual dan intelektual santri di era modern dengan tetap menjaga nilai-nilai luhur kepesantrenan.",
+      image: "/image/masjid-3.jpg",
+      title: "TRANSPARANSI & AKUNTABILITAS",
+      desc: "Salurkan donasi terbaik Anda. Kami berkomitmen menyajikan laporan keuangan dan kegiatan yang transparan bagi seluruh jamaah.",
     },
   ];
-
-  const fetchStats = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("homeStats")
-        .select("title, stats")
-        .eq("Home_Id", 1)
-        .order("id", { ascending: true });
-
-      if (error) throw error;
-      setStatsData(data || []);
-    } catch (err) {
-      console.error("Error fetching stats:", err);
-    }
-  };
-
-  useEffect(() => {
-    fetchStats();
-  }, []);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -98,114 +42,157 @@ export default function HeroSection() {
   }, [nextSlide]);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden font-sans bg-primary flex items-center justify-center">
-      {/* SLIDE BACKGROUND */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === index ? "opacity-100 z-0" : "opacity-0 -z-10"
-          }`}
-        >
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-[10s] ease-linear"
-            style={{
-              backgroundImage: `url('${slide.image}')`,
-              transform: currentSlide === index ? "scale(1.1)" : "scale(1)",
-            }}
-          />
-          <div className="absolute inset-0 bg-primary/60 backdrop-blur-[2px]" />
-        </div>
-      ))}
+    <section className="relative w-full min-h-[100dvh] bg-primary text-milk pt-28 pb-20 sm:pt-32 sm:pb-24 lg:pt-40 lg:pb-32 overflow-hidden font-sans flex flex-col justify-between">
+      {/* SVG CLIP PATH DEFINITION (BINGKAI ISLAMI 4 SISI) */}
+      <svg className="absolute w-0 h-0 pointer-events-none">
+        <defs>
+          <clipPath id="islamicFrame" clipPathUnits="objectBoundingBox">
+            <path d="M 0.5 0 C 0.65 0.08, 0.72 0.15, 0.78 0.22 C 0.85 0.28, 0.92 0.35, 1 0.5 C 0.92 0.65, 0.85 0.72, 0.78 0.78 C 0.72 0.85, 0.65 0.92, 0.5 1 C 0.35 0.92, 0.28 0.85, 0.22 0.78 C 0.15 0.72, 0.08 0.65, 0 0.5 C 0.08 0.35, 0.15 0.28, 0.22 0.22 C 0.28 0.15, 0.35 0.08, 0.5 0" />
+          </clipPath>
+        </defs>
+      </svg>
 
-      {/* CONTENT LAYER */}
-      <div className="relative z-20 w-full pt-24 pb-16 px-6 overflow-y-auto max-h-screen">
-        <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+      {/* DEKORASI PATTERN LATAR */}
+      <div 
+        className="absolute inset-0 opacity-10 bg-center bg-repeat pointer-events-none"
+        style={{ backgroundImage: "url('/image/mosque-pattern.svg')" }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full my-auto">
+        {/* GRID LAYOUT: DI MOBILE GAMBAR DI ATAS (`flex-col-reverse lg:flex-row` / order handling via grid) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* TEXT CONTENT */}
-          <motion.div
-            key={`text-${currentSlide}`}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-12"
-          >
-            <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight text-milk mb-6 uppercase"
-              style={{ textShadow: "2px 4px 12px rgba(0,0,0,0.5)" }}
-            >
-              {slides[currentSlide].title}
-            </h1>
-            <p className="text-lg md:text-xl text-bone max-w-3xl mx-auto mb-8 leading-relaxed">
-              {slides[currentSlide].desc}
-            </p>
-            <button className="px-10 py-4 bg-secondary text-milk font-bold rounded-full hover:bg-secondary/90 transition-all shadow-lg uppercase tracking-widest text-sm active:scale-95">
-              Pendaftaran
-            </button>
-          </motion.div>
-
-          {/* STATS SECTION */}
-          <div className="mt-5 w-full max-w-5xl">
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-              {statsData.map((stat, i) => {
-                const numericValue = parseInt(stat.stats.replace(/[^0-9]/g, ""));
-                const isPureNumeric = !isNaN(numericValue) && /^\d+$/.test(stat.stats);
-
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-milk/15 backdrop-blur-md border border-milk/20 p-4 md:p-6 rounded-2xl text-center text-milk min-w-[140px] md:min-w-[200px] flex-1 max-w-[240px]"
+          {/* BINGKAI GAMBAR (PALING ATAS SAAT MOBILE - ORDER 1) */}
+          <div className="order-1 lg:order-2 lg:col-span-5 flex justify-center items-center relative">
+            <div className="relative w-[240px] h-[240px] sm:w-[340px] sm:h-[340px] lg:w-[420px] lg:h-[420px] flex items-center justify-center">
+              
+              {/* OUTLINE EMAS BINGKAI LUAR */}
+              <div 
+                className="absolute inset-0 bg-gradient-to-br from-gold via-[#FDF0A6] to-gold p-2 sm:p-2.5 shadow-2xl transition-transform duration-500 hover:scale-105"
+                style={{ clipPath: "url(#islamicFrame)" }}
+              >
+                {/* BINGKAI DALAM */}
+                <div 
+                  className="w-full h-full bg-secondary p-1 sm:p-1.5"
+                  style={{ clipPath: "url(#islamicFrame)" }}
+                >
+                  {/* CONTAINER SLIDER GAMBAR */}
+                  <div 
+                    className="relative w-full h-full bg-dark overflow-hidden"
+                    style={{ clipPath: "url(#islamicFrame)" }}
                   >
-                    <p className="text-2xl md:text-4xl font-bold font-heading">
-                      {isPureNumeric ? (
-                        <Counter end={numericValue} />
-                      ) : (
-                        stat.stats
-                      )}
-                    </p>
-                    <p className="text-[10px] md:text-xs font-medium text-bone uppercase tracking-widest mt-1">
-                      {stat.title}
-                    </p>
-                  </motion.div>
-                );
-              })}
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={`img-${currentSlide}`}
+                        initial={{ opacity: 0, scale: 1.15 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative w-full h-full"
+                      >
+                        <Image
+                          src={slides[currentSlide].image}
+                          alt={slides[currentSlide].title}
+                          fill
+                          priority
+                          className="object-cover object-center"
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* TEKS & TOMBOL ACTION (BAWAH GAMBAR SAAT MOBILE - ORDER 2) */}
+          <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`text-${currentSlide}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6 }}
+                className="w-full flex flex-col items-center lg:items-start"
+              >
+                <h1 className="text-2xl sm:text-4xl lg:text-6xl font-heading font-extrabold text-milk leading-[1.2] mb-4 sm:mb-6 tracking-wide uppercase">
+                  {slides[currentSlide].title}
+                </h1>
+                
+                <p className="text-sm sm:text-base lg:text-lg text-bone/90 max-w-xl mb-6 sm:mb-8 leading-relaxed font-light">
+                  {slides[currentSlide].desc}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* ACTION BUTTONS (RATA TENGAH DI MOBILE) */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
+              <Link 
+                href="/profil/profil-masjid"
+                className="flex items-center justify-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-secondary text-milk rounded-full hover:bg-secondary/90 transition-all duration-300 shadow-md group border border-gold/40 text-xs sm:text-sm font-semibold tracking-wider uppercase"
+              >
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-milk text-secondary flex items-center justify-center transition-transform group-hover:scale-110">
+                  <Info size={15} />
+                </span>
+                <span>Profil Masjid</span>
+              </Link>
+
+              <Link 
+                href="/saran-kritik"
+                className="flex items-center justify-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-gold/20 text-milk rounded-full hover:bg-gold/30 transition-all duration-300 border border-gold/50 text-xs sm:text-sm font-semibold tracking-wider uppercase"
+              >
+                <MessageSquareText size={16} className="text-gold" />
+                <span>Saran & Kritik</span>
+              </Link>
             </div>
           </div>
 
         </div>
+
+        {/* CONTROLS SLIDER */}
+        <div className="flex items-center justify-between mt-10 sm:mt-12 lg:mt-16 w-full">
+          <div className="flex gap-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`transition-all duration-300 rounded-full h-2 ${
+                  currentSlide === index ? "w-6 sm:w-8 bg-gold" : "w-2 bg-milk/30"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={prevSlide}
+              aria-label="Previous Slide"
+              className="p-2 sm:p-2.5 rounded-full bg-milk/10 hover:bg-secondary text-milk border border-gold/30 transition-all active:scale-90"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              onClick={nextSlide}
+              aria-label="Next Slide"
+              className="p-2 sm:p-2.5 rounded-full bg-milk/10 hover:bg-secondary text-milk border border-gold/30 transition-all active:scale-90"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
+        </div>
+
       </div>
 
-      {/* NAVIGATION BUTTONS */}
-      <button 
-        onClick={prevSlide} 
-        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-40 bg-milk/10 hover:bg-secondary text-milk p-2 md:p-3 rounded-full transition-all border border-milk/10 active:scale-90"
-      >
-        <ChevronLeft size={20} className="md:w-7 md:h-7" />
-      </button>
-
-      <button 
-        onClick={nextSlide} 
-        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-40 bg-milk/10 hover:bg-secondary text-milk p-2 md:p-3 rounded-full transition-all border border-milk/10 active:scale-90"
-      >
-        <ChevronRight size={20} className="md:w-7 md:h-7" />
-      </button>
-
-      {/* SLIDE INDICATORS */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`transition-all duration-500 rounded-full h-1.5 ${
-              currentSlide === index ? "w-10 bg-secondary" : "w-3 bg-milk/30"
-            }`}
-          />
-        ))}
-      </div>
+      {/* ARCH CUTOUT BAWAH */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-10 sm:h-16 lg:h-20 bg-milk"
+        style={{
+          clipPath: "ellipse(60% 100% at 50% 100%)"
+        }}
+      />
     </section>
   );
 }
