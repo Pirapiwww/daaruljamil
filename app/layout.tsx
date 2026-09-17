@@ -20,8 +20,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pondok Pesantren Ardaniah",
-  description: "Website resmi Pondok Pesantren Ardaniah",
+  title: "Masjid Daarul Jamil",
+  description: "Website resmi Masjid Daarul Jamil",
 };
 
 export default function RootLayout({
