@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Cinzel_Decorative } from "next/font/google";
 import "./globals.css";
 import NavbarWrapper from "@/components/NavbarWrapper";
-import ViewTracker from "@/components/ViewTracker"; // 1. Import tracker
 
 export const cinzel = Cinzel_Decorative({
   subsets: ["latin"],
@@ -42,7 +41,6 @@ export default function RootLayout({
         `}
       >
         {/* 2. Panggil di sini agar berjalan di setiap halaman */}
-        <ViewTracker />
         
         <NavbarWrapper />
         
