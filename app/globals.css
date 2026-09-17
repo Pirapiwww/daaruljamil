@@ -1,0 +1,35 @@
+@config "../tailwind.config.ts";
+@import "tailwindcss";
+
+:root {
+  --background: #F9FAFB; /* gray-50 */
+  --primary: #103713;    /* Phthalo Green */
+  --secondary: #628B35;  /* Maximum Green */
+  --bone: #E2DBD0;       /* Bone */
+  --milk: #FFFDF5;       /* Milk */
+}
+
+body {
+  background: var(--background);
+  @apply font-sans;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.react-datepicker {
+  border-radius: 1rem !important;
+  border: none !important;
+  shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  font-family: inherit !important;
+}
+.react-datepicker__header {
+  background-color: white !important;
+  border-bottom: 1px solid #f3f4f6 !important;
+  border-top-left-radius: 1rem !important;
+  border-top-right-radius: 1rem !important;
+}
+.react-datepicker__day--selected {
+  background-color: #628B35 !important;
+  border-radius: 0.5rem !important;
+}
