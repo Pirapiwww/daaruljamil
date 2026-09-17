@@ -12,17 +12,17 @@ export default function HeroSection() {
   // DATA SLIDER MASJID DAARUL JAMIL
   const slides = [
     {
-      image: "/image/masjid-1.jpg",
+      image: "/image/masjid1.jpeg",
       title: "SELAMAT DATANG DI MASJID DAARUL JAMIL",
       desc: "Pusat ibadah, dakwah, dan pembinaan umat. Mari bersama memakmurkan Masjid Daarul Jamil dan mempererat ukhuwah Islamiyah.",
     },
     {
-      image: "/image/masjid-2.jpg",
+      image: "/image/alquran.jpg",
       title: "PROGRAM & KEGIATAN ISLAMI",
       desc: "Menyediakan program kerja peribadatan rutin, pelayanan sosial kematian, serta berbagai kajian ilmiah bersama para ustadz.",
     },
     {
-      image: "/image/masjid-3.jpg",
+      image: "/image/donasi.jpg",
       title: "TRANSPARANSI & AKUNTABILITAS",
       desc: "Salurkan donasi terbaik Anda. Kami berkomitmen menyajikan laporan keuangan dan kegiatan yang transparan bagi seluruh jamaah.",
     },
@@ -52,14 +52,28 @@ export default function HeroSection() {
         </defs>
       </svg>
 
+      {/* GIF BACKGROUND HIASAN LATAR */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <Image
+          src="/image/bg.gif" // Pastikan nama file gif Anda sesuai
+          alt="Masjid Animated Background"
+          fill
+          priority
+          unoptimized // Diperlukan agar animasi GIF tidak terhenti oleh proses optimasi Next.js
+          className="object-cover object-center opacity-30 filter blur-[1px]"
+        />
+        {/* OVERLAY GRADIENT DENGAN BACKDROP BLUR HALUS */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-primary/95 backdrop-blur-[1px]" />
+      </div>
+
       {/* DEKORASI PATTERN LATAR */}
       <div 
-        className="absolute inset-0 opacity-10 bg-center bg-repeat pointer-events-none"
+        className="absolute inset-0 opacity-10 bg-center bg-repeat pointer-events-none z-0"
         style={{ backgroundImage: "url('/image/mosque-pattern.svg')" }}
       />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full my-auto">
-        {/* GRID LAYOUT: DI MOBILE GAMBAR DI ATAS (`flex-col-reverse lg:flex-row` / order handling via grid) */}
+        {/* GRID LAYOUT */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* BINGKAI GAMBAR (PALING ATAS SAAT MOBILE - ORDER 1) */}
@@ -106,7 +120,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* TEKS & TOMBOL ACTION (BAWAH GAMBAR SAAT MOBILE - ORDER 2) */}
+          {/* TEKS & TOMBOL ACTION */}
           <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             <AnimatePresence mode="wait">
               <motion.div
@@ -117,17 +131,17 @@ export default function HeroSection() {
                 transition={{ duration: 0.6 }}
                 className="w-full flex flex-col items-center lg:items-start"
               >
-                <h1 className="text-2xl sm:text-4xl lg:text-6xl font-heading font-extrabold text-milk leading-[1.2] mb-4 sm:mb-6 tracking-wide uppercase">
+                <h1 className="text-2xl sm:text-4xl lg:text-6xl font-heading font-extrabold text-milk leading-[1.2] mb-4 sm:mb-6 tracking-wide uppercase drop-shadow-md">
                   {slides[currentSlide].title}
                 </h1>
                 
-                <p className="text-sm sm:text-base lg:text-lg text-bone/90 max-w-xl mb-6 sm:mb-8 leading-relaxed font-light">
+                <p className="text-sm sm:text-base lg:text-lg text-bone/90 max-w-xl mb-6 sm:mb-8 leading-relaxed font-light drop-shadow">
                   {slides[currentSlide].desc}
                 </p>
               </motion.div>
             </AnimatePresence>
 
-            {/* ACTION BUTTONS (RATA TENGAH DI MOBILE) */}
+            {/* ACTION BUTTONS */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
               <Link 
                 href="/profil/profil-masjid"
@@ -141,7 +155,7 @@ export default function HeroSection() {
 
               <Link 
                 href="/saran-kritik"
-                className="flex items-center justify-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-gold/20 text-milk rounded-full hover:bg-gold/30 transition-all duration-300 border border-gold/50 text-xs sm:text-sm font-semibold tracking-wider uppercase"
+                className="flex items-center justify-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-gold/20 text-milk rounded-full hover:bg-gold/30 transition-all duration-300 border border-gold/50 text-xs sm:text-sm font-semibold tracking-wider uppercase backdrop-blur-sm"
               >
                 <MessageSquareText size={16} className="text-gold" />
                 <span>Saran & Kritik</span>
@@ -170,14 +184,14 @@ export default function HeroSection() {
             <button
               onClick={prevSlide}
               aria-label="Previous Slide"
-              className="p-2 sm:p-2.5 rounded-full bg-milk/10 hover:bg-secondary text-milk border border-gold/30 transition-all active:scale-90"
+              className="p-2 sm:p-2.5 rounded-full bg-milk/10 hover:bg-secondary text-milk border border-gold/30 transition-all active:scale-90 backdrop-blur-sm"
             >
               <ChevronLeft size={16} />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Next Slide"
-              className="p-2 sm:p-2.5 rounded-full bg-milk/10 hover:bg-secondary text-milk border border-gold/30 transition-all active:scale-90"
+              className="p-2 sm:p-2.5 rounded-full bg-milk/10 hover:bg-secondary text-milk border border-gold/30 transition-all active:scale-90 backdrop-blur-sm"
             >
               <ChevronRight size={16} />
             </button>
@@ -188,7 +202,7 @@ export default function HeroSection() {
 
       {/* ARCH CUTOUT BAWAH */}
       <div 
-        className="absolute bottom-0 left-0 right-0 h-10 sm:h-16 lg:h-20 bg-milk"
+        className="absolute bottom-0 left-0 right-0 h-10 sm:h-16 lg:h-20 bg-milk z-10"
         style={{
           clipPath: "ellipse(60% 100% at 50% 100%)"
         }}
