@@ -1,15 +1,18 @@
 import HeroSection from "@/components/home/HeroSection"; 
-import KeunggulanSection from "@/components/home/Keunggulan";
+import JamSection from "@/components/home/jam";
+import AboutSection from "@/components/home/about";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
     <main className="relative w-full overflow-x-hidden">
       <HeroSection />
 
-      
+      <JamSection />      
 
-      <KeunggulanSection />
-      
+      <AboutSection />
+
+      <Footer />
       
     </main>
   );

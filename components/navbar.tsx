@@ -682,11 +682,11 @@ export default function Navbar() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Scroll to top"
-            className="fixed bottom-6 right-6 z-50 p-3.5 bg-secondary text-milk border border-gold/50 rounded-full shadow-lg shadow-dark/20 hover:bg-secondary/90 transition-colors duration-300 group"
+            className="fixed bottom-6 right-6 z-50 p-3.5 bg-secondary border border-gold/50 rounded-full shadow-lg shadow-dark/20 hover:bg-secondary/90 transition-colors duration-300 group"
           >
             <ChevronUp 
               size={22} 
-              className="group-hover:-translate-y-0.5 transition-transform duration-300 text-gold" 
+              className="group-hover:-translate-y-0.5 transition-transform duration-300 text-milk" 
             />
           </motion.button>
         )}

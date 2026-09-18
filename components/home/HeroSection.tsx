@@ -13,8 +13,8 @@ export default function HeroSection() {
   const slides = [
     {
       image: "/image/masjid1.jpeg",
-      title: "SELAMAT DATANG DI MASJID DAARUL JAMIL",
-      desc: "Pusat ibadah, dakwah, dan pembinaan umat. Mari bersama memakmurkan Masjid Daarul Jamil dan mempererat ukhuwah Islamiyah.",
+      title: "SELAMAT DATANG DI WEBSITE MASJID DAARUL JAMIL",
+      desc: "Pengunjung web dapat memperoleh informasi tentang Program Kerja DKM, Jadwal Sholat dan Laporan Keuangan juga akan ditampilkan, serta Informasi seputar prasarana Masjid bagi jamaah juga akan tersedia.",
     },
     {
       image: "/image/alquran.jpg",

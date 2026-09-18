@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "components/home/maps.tsx", "components/home/Keunggulan.jsx", "app/layout.tsx", "components/home/HomeVideo.tsx", "components/home/SplitStickyHome.jsx", "components/admin/kontak/AdminKontak.tsx", "components/admin/informasi/publikasi/publikasiAdmin.tsx", "components/admin/pendaftaran/AdminPendaftaran.tsx"  ],
+, "components/home/maps.tsx", "components/home/Keunggulan.jsx", "app/layout.tsx", "components/home/HomeVideo.tsx", "components/home/SplitStickyHome.jsx", "components/admin/kontak/AdminKontak.tsx", "components/admin/informasi/publikasi/publikasiAdmin.tsx", "components/admin/pendaftaran/AdminPendaftaran.tsx", "components/home/jam.tsx", "components/home/about.jsx"  ],
   "exclude": ["node_modules"]
 }
