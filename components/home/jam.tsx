@@ -35,7 +35,7 @@ export default function PrayerScheduleBarRevised() {
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Helper untuk format tanggal teks
+  // Helper untuk format tanggal teks (contoh: "Jumat, 18 September 2026")
   const formatTanggalTeks = (date: Date) => {
     return new Intl.DateTimeFormat("id-ID", {
       weekday: "long",
@@ -89,7 +89,7 @@ export default function PrayerScheduleBarRevised() {
     fetchJadwal();
   }, []);
 
-  // Variant Kontainer Utama
+  // Variant Kontainer Utama dengan Tipe Explicit `Variants`
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: 30, scale: 0.98 },
     visible: {
@@ -97,37 +97,38 @@ export default function PrayerScheduleBarRevised() {
       y: 0,
       scale: 1,
       transition: { 
-        duration: 0.5, 
+        duration: 0.6, 
         ease: "easeOut",
-        staggerChildren: 0.08 
+        staggerChildren: 0.1 
       },
     },
   };
 
-  // Variant untuk Elemen di Dalamnya
+  // Variant untuk Kartu dengan Tipe Explicit `Variants`
   const cardVariants: Variants = {
     hidden: { opacity: 0, scale: 0.85, y: 20 },
     visible: { 
       opacity: 1, 
       scale: 1, 
       y: 0, 
-      transition: { duration: 0.35, ease: "easeOut" } 
+      transition: { duration: 0.4, ease: "easeOut" } 
     },
   };
 
   return (
-    <section className="relative max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8 z-20">
-      {/* Container Utama dengan Key Dinamis berdasarkan Status Loading */}
-      <motion.div 
-        key={loading ? "loading-state" : "loaded-state"}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
-        variants={containerVariants}
-        className="bg-dark/95 backdrop-blur-sm p-4 sm:p-7 rounded-[24px] sm:rounded-[35px] border border-milk/10 shadow-2xl flex flex-col lg:flex-row items-center gap-4 sm:gap-8 overflow-hidden min-h-[160px] relative justify-center"
-      >
+    <section className="bg-milk">
+      <motion.section
+      className="relative bg-milk max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8 z-20"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.2 }}
+      variants={containerVariants}
+    >
+      {/* Container Utama */}
+      <div className="bg-dark/95 backdrop-blur-sm p-4 sm:p-7 rounded-[24px] sm:rounded-[35px] border border-milk/10 shadow-2xl flex flex-col lg:flex-row items-center gap-4 sm:gap-8 overflow-hidden min-h-[160px] relative justify-center">
+        
         {loading ? (
-          /* TAMPILAN LOADING BERPUTAR */
+          /* TAMPILAN LOADING BERPUTAR + SKELETON */
           <div className="w-full flex flex-col items-center justify-center py-6 sm:py-8 gap-3 text-milk/80">
             <Loader2 className="w-8 h-8 sm:w-10 sm:h-10 animate-spin text-secondary" />
             <p className="text-xs sm:text-sm font-medium tracking-wider uppercase text-bone/70 animate-pulse">
@@ -135,7 +136,7 @@ export default function PrayerScheduleBarRevised() {
             </p>
           </div>
         ) : (
-          /* TAMPILAN KONTEN UTAMA (Render Otomatis Memicu Animasi Saat Loading Selesai) */
+          /* TAMPILAN KONTEN UTAMA */
           <>
             {/* AREA LOKASI */}
             <motion.div 
@@ -203,7 +204,9 @@ export default function PrayerScheduleBarRevised() {
             </div>
           </>
         )}
-      </motion.div>
+
+      </div>
+    </motion.section>
     </section>
   );
 }

@@ -16,6 +16,7 @@
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.36.0",
+    "groq-sdk": "^1.6.0",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.575.0",
     "motion": "^12.36.0",

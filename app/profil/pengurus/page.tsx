@@ -1,5 +1,5 @@
 import AllHero from "@/components/AllHero";
-import ProfileSection from "@/components/profile/ProfileSection";
+import Footer from "@/components/footer";
 
 export default function Profile() {
   return (
@@ -7,12 +7,12 @@ export default function Profile() {
       <AllHero
         title="Profil Pondok Pesantren Ardaniah"
         description="Profil Singkat Pondok Pesantren Ardaniah Pusat dan Cabang Bogor"
-        imageSrc="/image/profil.jpg"
+        imageSrc="/image/masjid1.jpeg"
         altText="Hero Image"
-        imagePosition="70%"
+        imagePosition="50%"
     />
 
-    <ProfileSection />
+    <Footer />
     </main>
   );
 }

@@ -2,6 +2,7 @@ import HeroSection from "@/components/home/HeroSection";
 import JamSection from "@/components/home/jam";
 import AboutSection from "@/components/home/about";
 import Footer from "@/components/footer";
+import DailyAyat from "@/components/home/DailyAyat";
 
 export default function Home() {
   return (
@@ -11,6 +12,8 @@ export default function Home() {
       <JamSection />      
 
       <AboutSection />
+      <DailyAyat />
+      
 
       <Footer />
       

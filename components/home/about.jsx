@@ -197,30 +197,6 @@ export default function AboutSection() {
               ))}
             </motion.div>
 
-            {/* POIN KEUNGGULAN / PILAR UTAMA */}
-            <motion.div 
-              variants={fadeInUp}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-2 gap-4 w-full mb-8"
-            >
-              {aboutData.pillars.map((pillar, index) => {
-                const IconComponent = pillar.icon;
-                return (
-                  <div 
-                    key={index} 
-                    className="flex items-start gap-3 p-3 rounded-xl bg-white/60 border border-primary/10 shadow-sm"
-                  >
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
-                      <IconComponent className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-primary">{pillar.title}</h4>
-                      <p className="text-[11px] text-gray-500">{pillar.desc}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </motion.div>
 
             {/* TOMBOL BACA SELENGKAPNYA */}
             <motion.div variants={fadeInUp} transition={{ duration: 0.5 }}>
